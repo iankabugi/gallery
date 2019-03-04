@@ -8,13 +8,85 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-inverse">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="{% url 'newsToday' %}">MY-GALLERY</a>
-            </div>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+        integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Oleo+Script+Swash+Caps+Lora" rel="stylesheet">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar">
+        <a class="navbar-brand head" href="/" id="gallery"><img src="/static/photos/logo.png" class="img-responsive"
+                style="width:50px;height: 50px;">&nbsp;<b>MYGallery</b></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item dropdown dropdown">
+                    <a class="nav-link dropdown-toggle locations" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:#ece3d1;">
+                        Locations&nbsp;<i class="fas fa-map-marker-alt"></i>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="background:rgb(11, 8, 14)">
+                        <a class="dropdown-item" href="/location/3">India</a>
+            
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle categories" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:#ece3d1;">
+                        Categories
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="background:rgb(32, 32, 32)">
+                        <a class="dropdown-item" href="/category/1">Nature</a>
+                        <a class="dropdown-item" href="/category/2">Cities</a>
+                        <a class="dropdown-item" href="/category/4">Food</a>
+                        <a class="dropdown-item" href="/category/5">Religion</a>
+                    </div>
+                </li>
+            </ul>
         </div>
     </nav>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Nunito|Oleo+Script+Swash+Caps');
+
+        .navbar {
+            font-family: 'Lora', serif;
+            width: 100%;
+            font-size: 20px;
+            position: fixed;
+            z-index: 1;
+        }
+
+        .bg-dark {
+            background-color: rgb(177, 187, 41);
+        }
+
+        #gallery {
+            font-size: 30px;
+        }
+
+        .dropdown-item {
+            color: #ece3d1;
+        }
+
+        .head {
+            color: #ece3d1 !important;
+        }
+
+        .head:hover {
+            color: green !important;
+        }
+
+        .categories:hover {
+            color: green !important;
+        }
+
+        .locations:hover {
+            color: green !important;
+        }
+    </style>
 </body>
 
 </html
