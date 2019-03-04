@@ -3,17 +3,6 @@ import datetime as dt
 
 
 # Create your models here.
-# class Photographer(models.Model):
-#     first_name = models.CharField(max_length=30)
-#     last_name = models.CharField(max_length=30)
-#     email = models.EmailField()
-#     phone_number = models.CharField(max_length=10, blank=True)
-
-#     def __str__(self):
-#         return self.first_name
-
-#     def save_photographer(self):
-#         self.save()
 
 class Category(models.Model):
     category = models.CharField(max_length=30)
@@ -24,6 +13,16 @@ class Category(models.Model):
     def save_category(self):
         self.save()
 
+    def delete_category(self):
+        self.delete()
+
+    @classmethod
+    def update_category(cls, id, category):
+        category = cls.objects.get(pk=id)
+        category = cls(category=category)
+        category.save()
+
+
 class Location(models.Model):
     location = models.CharField(max_length=30)
 
@@ -33,15 +32,47 @@ class Location(models.Model):
     def save_category(self):
         self.save()
 
+    def delete_location(self):
+        self.delete()
+
+
 class Image(models.Model):
-    image = models.ImageField(upload_to = 'images/')
-    name = models.CharField(max_length =60)
+    image = models.ImageField(upload_to='images/')
+    name = models.CharField(max_length=60)
     description = models.TextField()
     category = models.ForeignKey(Category)
     location = models.ForeignKey(Location)
 
+    def __str__(self):
+        return self.name
+
+    def save_image(self):
+        self.save()
+
+    def delete_image(self):
+        self.delete()
+
+    @classmethod
+    def update_image(cls,id,name,description,location,category):
+        image = cls.objects.get(pk=id)
+        image = cls(name=name,description=description,location=location,category=category)
+        image.save()
+
+    @classmethod
+    def get_image_by_id(cls, id):
+        image = cls.objects.get(pk=id)
+        return image
+
+    @classmethod
+    def filter_by_location(cls, location):
+        images = cls.objects.filter(location=location)
+        return images
+    @classmethod
+    def all_images(cls):
+        images = cls.objects.all()
+        return images
+
     @classmethod
     def search_by_category(cls, search_term):
-        photos = cls.objects.filter(title__icontains=search_term)
+        photos = cls.objects.filter(category__category=search_term)
         return photos
-    
