@@ -30,7 +30,7 @@ class Location(models.Model):
     def __str__(self):
         return self.location
 
-    def save_category(self):
+    def save_location(self):
         self.save()
 
     def delete_location(self):
