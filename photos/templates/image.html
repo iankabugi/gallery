@@ -1,0 +1,48 @@
+{%extends 'base.html'%}
+
+ {% block content %}
+
+ <div class="container">
+
+   <div class="row">
+        <img src="{{image.image_url.url}}" class="img-responsive" alt="Image" style="width:150px; height:250px;">
+   </div>
+
+   <div class="row">
+     <h1 class="text-center">{{image.name}}</h1>
+   </div>
+
+   <div class="row">
+     <p>{{image.category}}</p>
+   </div>
+
+   <div class="row">
+     <p>{{image.location}}</p>
+   </div>
+  <div>
+
+        <input type="button" value="Copy Url" onclick="Copy();" />
+        <br />
+
+        <p>Image Link: <textarea id="urlCopied" rows="1" cols="30"> </textarea></p>
+    </div>
+ </div>
+ {% block scripts %}
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+       
+        <script>
+     function Copy() 
+            {
+                //var Url = document.createElement("textarea");
+                urlCopied.innerHTML = window.location.href;
+                //Copied = Url.createTextRange();
+                //Copied.execCommand("Copy");
+                var copied = alert("You can copy link from textarea")
+            }
+
+        </script>
+        <script src="../../static/js/nav.js"></script>
+        <script src="../../static/js/modal.js"></script>
+
+ {% endblock %}
+ {% endblock %}
