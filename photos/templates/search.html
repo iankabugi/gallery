@@ -1,0 +1,115 @@
+{%extends 'base.html'%}
+{% block content %} 
+{{ block.super}}
+
+<nav class="w3-sidebar w3-bar-block w3-white w3-animate-right w3-top w3-text-black w3-large" style="z-index:3;width:250px;font-weight:bold;display:none;right:0;" id="mySidebar">
+    <a href="javascript:void()" onclick="w3_close()" class="w3-bar-item w3-button w3-center w3-padding-32">CLOSE</a> 
+    <a href="#view" onclick="w3_close()" class="w3-bar-item w3-button w3-center w3-padding-16">VIEW IMAGES</a> 
+    <a href="/admin" onclick="w3_close()" class="w3-bar-item w3-button w3-center w3-padding-16">ADMIN</a> 
+    <a href="{% url 'location' %}" onclick="w3_close()" class="w3-bar-item w3-button w3-center w3-padding-16">LOCATION</a>
+  </nav>
+  
+  <!-- Top menu on small screens -->
+  <header class="w3-container w3-top w3-black w3-md w3-padding-16">
+    <span class="w3-left w3-padding"><a href="/"> BUGI's Gallery</a></span>
+    <a href="javascript:void(0)" class="w3-right w3-button w3-white" onclick="w3_open()">☰</a>
+    <form  class= "w3 center"style="margin-top:10px; margin-left:auto;margin-right:auto; width: 50%;" class="navbar-form" role="search" action="{% url 'search_results' %}">
+
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search Category" category="image">
+          
+          <div class="input-group-btn">
+            <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+          </div>
+        
+        </div>
+       
+      </form>
+    
+  </header>
+  
+  <!-- Overlay effect when opening sidebar on small screens -->
+  <div class="w3-overlay w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+<div class="w3-display-container"   class="img-responsive"  style="margin-bottom:100px">
+   
+</div>  
+{%for image in images%}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+
+
+<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+
+  <img src="{{image.image.url}}" class="img-responsive"  alt="Image" style="width:100%; height:250px; padding-left: 20px;padding-right:25px;"><br>
+  <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#{{image.id}}" style="margin-left:35%; margin-top:10px;margin-bottom:25px;" >View image</button>
+  </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="{{image.id}}" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">{{image.name}}</h4>
+        </div>
+        <div class="modal-body">
+            <img src="{{image.image.url}}" class="img-responsive"  alt="Image" style="width:1000px; height:300px; padding-left: 20px;padding-right:25px;"><br>
+            <p><strong>description</strong> <p> {{image.description}}</p><br>
+            <br>
+            <p><strong>location</strong></p> <p>{{image.location}}</p><br>
+            <br>
+            <p><strong>Category</strong></p> <p>{{image.category}}</p>
+        </div>
+        <div class="modal-footer">   
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+          <input type="button" class="btn btn-secondary btn-sm" value="Copy Url" onclick="Copy();" />
+          <input class="form-control" type="text" id="urlCopied" value="127.0.0.1:8000{{image.image.url}}"
+            id="thislinkhere-{{image.id}}"> 
+            <div>
+            </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+</div>
+
+{%endfor%}
+
+<script>
+    function Copy() 
+           {
+               //var Url = document.createElement("textarea");
+               urlCopied.innerHTML = window.location.href;
+               //Copied = Url.createTextRange();
+               //Copied.execCommand("Copy");
+               var copied = alert("You can copy link from textarea")
+           }
+
+      
+       function w3_open() {
+        document.getElementById("mySidebar").style.display = "block";
+        document.getElementById("myOverlay").style.display = "block";
+      }
+      
+      function w3_close() {
+        document.getElementById("mySidebar").style.display = "none";
+        document.getElementById("myOverlay").style.display = "none";
+      }
+      
+      // Modal Image Gallery
+      function onClick(element) {
+        document.getElementById("img01").src = element.src;
+        document.getElementById("modal01").style.display = "block";
+        var captionText = document.getElementById("caption");
+        captionText.innerHTML = element.alt;
+      }
+    </script> 
+</div>
+{%endblock%}
