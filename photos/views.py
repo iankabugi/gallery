@@ -5,7 +5,7 @@ from .models import Image
 # Create your views here.
 def photos(request):
     images = Image.all_images()
-    return render(request, 'gallery.html', {"images":images})
+    return render(request, 'index.html', {"images":images})
 
 
 def search_results(request):
@@ -27,6 +27,8 @@ def image(request,image_id):
     except DoesNotExist:
         raise Http404()
     return render(request,"image.html",{"image":image})
-# Create your views here.
-def welcome(request):
-    return render(request, 'welcome.html')
+def page(request):
+    return render(request,"page.html",{"title":location})
+def location(request,location):
+        locations = Image.filter_by_location(location)
+        return render(request,'location.html',{"images": locations})
