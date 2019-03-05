@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse,Http404
 from .models import Image
 
@@ -10,15 +10,15 @@ def photos(request):
 
 def search_results(request):
 
-    if 'article' in request.GET and request.GET["article"]:
-        search_term = request.GET.get("article")
-        searched_images = Image.search_by_category(search_term)
-        message = f"{search_term}"
-        return render(request, 'search_image.html',{"message":message,"images": searched_images})
+    if 'image' in request.GET and request.GET["image"]:
+        category = request.GET.get("image")
+        searched_images = Image.search_by_category(category)
+        message = f"{category}"
+        return render(request, 'search.html',{"message":message,"images": category})
     else:
         message = "No photos under this category exist"
-        return render(request, 'search_image.html',{"message":message})
-    return render(request,"search_image.html")    
+        return render(request, 'search.html',{"message":message})
+    return render(request,"search.html")    
 
 
 def image(request,image_id):
