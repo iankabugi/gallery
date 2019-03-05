@@ -1,0 +1,106 @@
+{%extends 'base.html/'%}
+{% block content %}
+{{ block.super}}
+
+<nav class="w3-sidebar w3-bar-block w3-blue w3-animate-left w3-top w3-text-light-grey w3-large"
+  style="z-index:3;width:250px;font-weight:bold;display:none;left:0;" id="mySidebar">
+  <a href="javascript:void()" onclick="w3_close()" class="w3-bar-item w3-button w3-center w3-padding-32"></a>
+  <a href="#view" onclick="w3_close()" class="w3-bar-item w3-button w3-center w3-padding-16">VIEW IMAGES</a>
+  <a href="/admin" onclick="w3_close()" class="w3-bar-item w3-button w3-center w3-padding-16">ADMIN</a>
+  <a href="{% url 'location' %}" onclick="w3_close()" class="w3-bar-item w3-button w3-center w3-padding-16">LOCATION</a>
+</nav>
+
+<!-- Top menu on small screens -->
+<header class="w3-container w3-top w3-white w3-xlarge w3-padding-16">
+  <span class="w3-animate-left w3-padding"><a href="/"> <strong>BUGI'S GALLERY</strong></a></span>
+  <a href="javascript:void(0)" class="w3-left w3-button w3-white" onclick="w3_open()">☰</a>
+</header>
+
+<!-- Overlay effect when opening sidebar on small screens -->
+<div class="w3-overlay w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu"
+  id="myOverlay"></div>
+<div class="w3-display-container" class="img-responsive" style="margin-bottom:100px"><img src="/static/images/"
+    style="width:100%;height:30%;opacity:1.0;">
+
+</div>
+<div class="images" id="view">
+  {%for image in images%}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+
+
+  <div class="col-md-4">
+
+    <img src="{{image.image.url}}" class="img-responsive" alt="Image"
+      style="width:100%; height:250px; padding-left: 20px;padding-right:25px;"><br>
+    <button type="button" class="btn + btn-sm" data-toggle="modal" data-target="#{{image.id}}"
+      style="margin-left:35%; margin-top:10px;margin-bottom:25px; opacity:0.7;">more details</button>
+  </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="{{image.id}}" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">{{image.name}}</h4>
+      </div>
+      <div class="modal-body">
+        <img src="{{image.image.url}}" class="img-responsive" alt="Image"
+          style="width:1000px; height:300px; padding-left: 20px;padding-right:25px;"><br>
+        <p><strong>description</strong>
+          <p> {{image.description}}</p><br><br>
+          <p><strong>location</strong></p>
+          <p>{{image.location}}</p><br><br>
+          <p><strong>Category</strong></p>
+          <p>{{image.category}}</p>
+      </div>
+      <div class="modal-footer">
+
+        <button class="btn btn-secondary btn-sm" onclick="myFunction()"> Copy Url</button>
+        <input class="form-control" type="text" id="myInput" value="127.0.0.1:8000{{image.image.url}}">
+
+        <div>
+          <link href="https://fonts.googleapis.com/css?family=Laila|ZCOOL+QingKe+HuangYou" rel="stylesheet">
+          
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</div>
+</div>
+
+{%endfor%}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script>
+  function myFunction() {
+    var copyText = document.getElementById("myInput");
+    copyText.select();
+    document.execCommand("copy");
+    alert("Copied the text: " + copyText.value);
+  }
+
+  function w3_open() {
+    document.getElementById("mySidebar").style.display = "block";
+    document.getElementById("myOverlay").style.display = "block";
+  }
+  function w3_close() {
+    document.getElementById("mySidebar").style.display = "none";
+    document.getElementById("myOverlay").style.display = "none";
+  }
+  function onClick(element) {
+    document.getElementById("img01").src = element.src;
+    document.getElementById("modal01").style.display = "block";
+    var captionText = document.getElementById("caption");
+    captionText.innerHTML = element.alt;
+  }
+</script>
+</div>
+{%endblock%}
