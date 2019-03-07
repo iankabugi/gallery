@@ -63,7 +63,7 @@ class ImageTestCase(TestCase):
         This will create a new image before each test case
         """
         lion = Category(category="wildlife")
-        fun.save()
+        lion.save()
         Nairobi = Location(location="Nairobi")
         Nairobi.save()
         self.new_image = Image(
