@@ -67,7 +67,7 @@ class ImageTestCase(TestCase):
         Nairobi = Location(location="Nairobi")
         Nairobi.save()
         self.new_image = Image(
-            name="image", description="h", location=Nairobi, category=wildlife)
+            name="image", description="this is a unique image", location=Nairobi, category=wildlife)
 
     def tearDown(self):
         """
